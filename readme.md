@@ -2,7 +2,7 @@
     <img src="https://javier.rodriguez.org.mx/itesm/2014/tecnologico-de-monterrey-black.png" alt="ITESM" title="ITESM" align="right" height="60" />
 </a>
 
-# Clinica Administration 🏥
+# Clinic Administration 🏥
 
 #### TC1030
 _Proyecto para la materia de POO, en C++._
@@ -17,13 +17,13 @@ _Proyecto para la materia de POO, en C++._
 _Clonar repositorio o descargar código fuente._
 
 ```shell
-    git clone https://github.com/iangg29/TC1030
+    git clone https://github.com/iangg29/Clinic-Administration
 ```
 
 _Ir al proyecto descargado_
 
 ```shell
-    cd TC1030
+    cd Clinic-Administration
 ```
 
 _Compilar programa_
