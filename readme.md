@@ -2,8 +2,9 @@
     <img src="https://javier.rodriguez.org.mx/itesm/2014/tecnologico-de-monterrey-black.png" alt="ITESM" title="ITESM" align="right" height="60" />
 </a>
 
-# TC1030 ⌨️
+# Clinica Administration 🏥
 
+#### TC1030
 _Proyecto para la materia de POO, en C++._
 
 ### Pre-requisitos 📋
