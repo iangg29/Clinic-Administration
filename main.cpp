@@ -10,9 +10,9 @@
 //
 //
 
-#include <iostream>
+#include "Application.h"
 
 int main() {
-    // NEW PROJECT!
+    Application("Clinic Administration", true).init();
     return 0;
 }
