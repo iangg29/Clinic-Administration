@@ -18,10 +18,9 @@
 #include <vector>
 #include "Module.h"
 #include "modules/TestModule.h"
+#include "exceptions/ModuleFailedLoading.h"
 
 using namespace std;
-
-class Module;
 
 class Application {
 private:
@@ -35,6 +34,8 @@ private:
     vector<Module> modules;
 
     void log(string message);
+
+    TestModule testModule;
 
 public:
     Application(string name, bool debug);
@@ -62,6 +63,8 @@ public:
     vector<Module> getModules();
 
     void addModule(Module &module);
+
+    TestModule getTestModule();
 };
 
 Application::Application(string name, bool debug) {
@@ -75,8 +78,12 @@ void Application::init() {
     if (!isStarted()) {
         this->startTime = TimeUtil().getMillis();
         setStarted(true);
-        TestModule testing = TestModule();
-        addModule(testing);
+        try {
+            this->testModule = TestModule(this);
+            addModule(testModule);
+        } catch (ModuleFailedLoading &e) {
+            log(e.getMessage());
+        }
         log("INIT!");
         this->finishTime = TimeUtil().getMillis();
         if (isDebug()) cout << "Application started in [" << (finishTime - startTime) << "]ms." << endl;
@@ -134,7 +141,15 @@ vector<Module> Application::getModules() {
 }
 
 void Application::addModule(Module &module) {
-    getModules().push_back(module);
+    try {
+        getModules().push_back(module);
+    } catch (exception exception) {
+        throw ModuleFailedLoading();
+    }
+}
+
+TestModule Application::getTestModule() {
+    return this->testModule;
 }
 
 

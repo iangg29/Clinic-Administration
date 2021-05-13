@@ -19,8 +19,6 @@
 
 using namespace std;
 
-class Application;
-
 class Module {
 private:
     string display;
