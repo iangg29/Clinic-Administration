@@ -16,11 +16,15 @@
 #include <iostream>
 #include <string>
 #include "./utils/TimeUtil.h"
+#include "iStart.h"
 
 using namespace std;
 
-class Module {
+class Application;
+
+class Module : public iStart {
 private:
+    Application *app;
     string display;
     int startupTime;
     bool started;
@@ -31,12 +35,14 @@ protected:
 
     void logFatal(string message);
 
+    Module(Application *app, string display);
+
 public:
     explicit Module(string display);
 
-    virtual void start();
+    virtual void start() override;
 
-    virtual void end();
+    virtual void end() override;
 
     string getDisplay();
 
@@ -45,13 +51,21 @@ public:
     bool isStarted();
 
     void setStarted(bool started);
+
+    Application *getApplication();
 };
 
 Module::Module(string display) {
     this->display = display;
     this->startupTime = TimeUtil().getMillis();
     this->started = false;
-    // TODO: Register module!
+}
+
+Module::Module(Application *app, string display) {
+    this->app = app;
+    this->display = display;
+    this->startupTime = TimeUtil().getMillis();
+    this->started = false;
     try {
         start();
     } catch (exception exception) {
@@ -99,6 +113,10 @@ void Module::logWarn(string message) {
 
 void Module::logFatal(string message) {
     cout << "[ERROR] " << message << endl;
+}
+
+Application *Module::getApplication() {
+    return this->app;
 }
 
 #endif //CLINICADMINISTRATION_MODULE_H

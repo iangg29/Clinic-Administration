@@ -17,11 +17,7 @@
 #include <string>
 #include "../Module.h"
 
-class Application;
-
 class TestModule : public Module {
-private:
-    Application *app;
 public:
 
     TestModule();
@@ -31,14 +27,16 @@ public:
     void start() override;
 
     void end() override;
-
-    Application *getApplication();
 };
 
 TestModule::TestModule() : Module("Test Module") {}
 
-TestModule::TestModule(Application *app) : Module("Test Module") {
-    this->app = app;
+TestModule::TestModule(Application *app) : Module(app, "Test Module") {
+    try {
+        start();
+    } catch (exception exception) {
+        logWarn("Module couldn't load!");
+    }
 }
 
 void TestModule::start() {
@@ -47,10 +45,6 @@ void TestModule::start() {
 
 void TestModule::end() {
     log("CLEARING CACHE! ENDING...");
-}
-
-Application *TestModule::getApplication() {
-    return this->app;
 }
 
 
