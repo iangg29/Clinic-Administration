@@ -43,6 +43,14 @@ _Ejecutar_
     a.exe
 ```
 
+## Diagrama UML
+
+<p align="center">
+    <img src="UML.jpeg" alt="Diagrama UML">
+</p>
+
+Ver [UML.jpeg](UML.jpeg)
+
 ## Construido con 🛠️
 
 * [C++](https://en.wikipedia.org/wiki/C%2B%2B)
