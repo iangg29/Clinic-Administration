@@ -16,10 +16,13 @@
 #include <iostream>
 #include <string>
 #include "../Module.h"
+#include "Transaction.h"
 
 const string NAME_ACCOUNTING = "Accounting Manager";
 
 class AccountingManager : public Module {
+private:
+    float balance;
 public:
     AccountingManager();
 
@@ -28,6 +31,12 @@ public:
     void start() override;
 
     void end() override;
+
+    float getBalance();
+
+    float setBalance(float balance);
+
+    void addTransaction(Transaction transaction);
 };
 
 AccountingManager::AccountingManager() : Module(NAME_ACCOUNTING) {}
@@ -47,6 +56,18 @@ void AccountingManager::start() {
 void AccountingManager::end() {
     Module::end();
     log("CLEARING CACHE!");
+}
+
+float AccountingManager::getBalance() {
+    return this->balance;
+}
+
+float AccountingManager::setBalance(float balance) {
+    this->balance = balance;
+}
+
+void AccountingManager::addTransaction(Transaction transaction) {
+    // TODO: Transaction logic.
 }
 
 
