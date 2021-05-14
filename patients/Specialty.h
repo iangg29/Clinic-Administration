@@ -27,6 +27,8 @@ class Specialty {
 private:
     string name;
 public:
+    Specialty();
+
     Specialty(string name);
 
     string getName();
@@ -35,7 +37,14 @@ public:
 };
 
 /**
- * Constructor de la clase.
+ * Constructor de la clase sin parámetros.
+ * */
+Specialty::Specialty() {
+    this->name = "";
+}
+
+/**
+ * Constructor principal de la clase con parámetros.
  * @param name Nombre de la especialidad
  * */
 Specialty::Specialty(string name) {
