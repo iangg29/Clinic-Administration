@@ -16,9 +16,20 @@
 #include <iostream>
 #include <string>
 
+/*
+ * ModuleFailedLoading: Excepción que generada cuando algún módulo no puede iniciar.
+ * @file ModuleFailedLoading.h
+ * @author Ian
+ * */
+
+
 using namespace std;
 
 struct ModuleFailedLoading : public exception {
+    /**
+     * Obtiene el mensaje de la excepción.
+     * @return Mensaje
+     * */
     const char *getMessage() const noexcept {
         return "Module couldn't load successfully, terminating app.";
     }

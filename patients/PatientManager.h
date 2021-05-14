@@ -20,6 +20,11 @@
 #include "../Module.h"
 #include "Patient.h"
 
+/*
+ * PatientManager: Clase que administra los pacientes.
+ * @file PatientManager.h
+ * @author Ian
+ * */
 
 const string NAME_PATIENT = "Patient Manager";
 
@@ -47,8 +52,15 @@ public:
     void unregisterPatient(Patient &patient);
 };
 
+/**
+ * Constructor de la clase sin parámetros.
+ * */
 PatientManager::PatientManager() : Module(NAME_PATIENT) {}
 
+/**
+ * Constructor principal de la clase con parámetros.
+ * @param app Instancia de la aplicación principal.
+ * */
 PatientManager::PatientManager(Application *app) : Module(app, NAME_PATIENT) {
     try {
         start();
@@ -57,19 +69,32 @@ PatientManager::PatientManager(Application *app) : Module(app, NAME_PATIENT) {
     }
 }
 
+/**
+ * Método de inicio del módulo.
+ * */
 void PatientManager::start() {
     Module::start();
 }
 
+/**
+ * Método de finalización del módulo.
+ * */
 void PatientManager::end() {
     Module::end();
-    log("CLEARING CACHE!");
 }
 
+/**
+ * Obtiene el mapa de los pacientes registrados.
+ * @return Mapa pacientes
+ * */
 unordered_map<int, Patient> PatientManager::getPatients() {
     return this->patients;
 }
 
+/**
+ * Registra un nuevo paciente en el mapa.
+ * @param patient Paciente a registrar
+ * */
 void PatientManager::registerPatient(Patient &patient) {
     int newID = getCount() + 1;
     getPatients().insert(make_pair(newID, patient));
@@ -77,6 +102,10 @@ void PatientManager::registerPatient(Patient &patient) {
     setCount(newID);
 }
 
+/**
+ * Remueve al paciente del mapa.
+ * @param patient Paciente a quitar
+ * */
 void PatientManager::unregisterPatient(Patient &patient) {
     unordered_map<int, Patient>::const_iterator searchResult = getPatients().find(patient.getId());
     if (searchResult != getPatients().end()) {
@@ -85,10 +114,18 @@ void PatientManager::unregisterPatient(Patient &patient) {
     }
 }
 
+/**
+ * Obtiene la cuenta de pacientes (aka ID)
+ * @return Cuenta de pacientes
+ * */
 int PatientManager::getCount() {
     return this->count;
 }
 
+/**
+ * Asigna la cuenta de pacientes.
+ * @param count Nueva cuenta
+ * */
 void PatientManager::setCount(int count) {
     this->count = count;
 }

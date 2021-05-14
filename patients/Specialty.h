@@ -15,6 +15,12 @@
 
 #include <string>
 
+/*
+ * Specialty: Clase de ayuda para especialidades.
+ * @file Specialty.h
+ * @author Ian
+ * */
+
 using namespace std;
 
 class Specialty {
@@ -28,14 +34,26 @@ public:
     void setName(string name);
 };
 
+/**
+ * Constructor de la clase.
+ * @param name Nombre de la especialidad
+ * */
 Specialty::Specialty(string name) {
     this->name = name;
 }
 
+/**
+ * Obtiene el nombre de la especialidad.
+ * @return Nombre
+ * */
 string Specialty::getName() {
     return this->name;
 }
 
+/**
+ * Asigna el nombre de la especialidad.
+ * @param name Nombre
+ * */
 void Specialty::setName(string name) {
     this->name = name;
 }

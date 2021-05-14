@@ -15,11 +15,22 @@
 
 #include <iostream>
 
+/*
+ * TimeUtil: Clase de utilidad para obtener el tiempo actual en milisegundos.
+ * @file TimeUtil.h
+ * @author Ian
+ * */
+
+
 class TimeUtil {
 public:
     int getMillis();
 };
 
+/**
+ * Obtiene tiempo actual en milisegundos.
+ * @return Tiempo
+ * */
 int TimeUtil::getMillis() {
     return std::chrono::duration_cast<std::chrono::milliseconds>(
             std::chrono::system_clock::now().time_since_epoch()).count();
