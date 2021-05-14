@@ -94,7 +94,7 @@ float AccountingManager::setBalance(float balance) {
 }
 
 /**
- * Agrega una transacción al historial.
+ * Agrega una transacción modificando el balance general.
  * @param transaction Transacción
  * */
 void AccountingManager::addTransaction(Transaction transaction) {
