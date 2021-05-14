@@ -7,6 +7,8 @@
 #### TC1030
 _Proyecto para la materia de POO, en C++._
 
+### - **IMPORTANTE** Versión *BETA* se encuentra en rama *development*. -
+
 ### Pre-requisitos 📋
 
 * C++ 11.
