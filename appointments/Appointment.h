@@ -15,6 +15,9 @@
 
 #include <iostream>
 #include <string>
+#include "../patients/Specialty.h"
+#include "../patients/Doctor.h"
+#include "../patients/Patient.h"
 
 /*
  * Appointment: Clase principal de cada consulta.
@@ -25,15 +28,15 @@
 class Appointment {
 private:
     int ID;
-    // TODO: Specialty
+    Specialty specialty;
     int day;
     string month;
-    // TODO: Doctor
-    // TODO: Patient
+    Doctor doctor;
+    Patient patient;
     int cost;
     bool active;
 public:
-    Appointment(int day, string month, int cost);
+    Appointment(int day, string month, int cost, Specialty specialty, Doctor doctor, Patient patient);
 
     void reserve();
 
@@ -60,6 +63,18 @@ public:
     bool isActive();
 
     void setActive(bool active);
+
+    Specialty getSpecialty();
+
+    void setSpecialty(Specialty specialty);
+
+    Doctor getDoctor();
+
+    void setDoctor(Doctor doctor);
+
+    Patient getPatient();
+
+    void setPatient(Patient patient);
 };
 
 /**
@@ -67,13 +82,19 @@ public:
  * @param day Día de la consulta.
  * @param month Mes de la consulta.
  * @param cost Costo de la consulta.
+ * @param specialty Especialidad de la consulta.
+ * @param doctor Doctor que realizará la consulta.
+ * @param patient Paciente que asistirá.
  * */
-Appointment::Appointment(int day, string month, int cost) {
+Appointment::Appointment(int day, string month, int cost, Specialty specialty, Doctor doctor, Patient patient) {
     this->ID = 0;
     this->day = day;
     this->month = month;
     this->cost = cost;
     this->active = false;
+    this->specialty = specialty;
+    this->doctor = doctor;
+    this->patient = patient;
 }
 
 /**
@@ -175,6 +196,53 @@ bool Appointment::isActive() {
  * */
 void Appointment::setActive(bool active) {
     this->active = active;
+}
+
+/**
+ * Obtiene la especialidad de la consulta.
+ * @return Especialidad
+ * */
+Specialty Appointment::getSpecialty() {
+    return this->specialty;
+}
+
+/**
+ * Asigna la especialidad a la consulta.
+ * @param specialty Especialidad
+ * */
+void Appointment::setSpecialty(Specialty specialty) {
+    this->specialty = specialty;
+}
+
+/**
+ * Obtiene el doctor de la consulta.
+ * @return Doctor
+ * */
+Doctor Appointment::getDoctor() {
+    return this->doctor;
+}
+
+/**
+ * Asigna el doctor a la consulta.
+ * @param doctor Doctor
+ * */
+void Appointment::setDoctor(Doctor doctor) {
+    this->doctor = doctor;
+}
+
+/**
+ * Obtiene el paciente de la consulta.
+ * */
+Patient Appointment::getPatient() {
+    return this->patient;
+}
+
+/**
+ * Asigna el paciente de la consulta.
+ * @param patient Paciente
+ * */
+void Appointment::setPatient(Patient patient) {
+    this->patient = patient;
 }
 
 
