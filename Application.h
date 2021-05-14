@@ -21,6 +21,7 @@
 #include "appointments/AppointmentManager.h"
 #include "patients/PatientManager.h"
 #include "exceptions/ModuleFailedLoading.h"
+#include "cli/CommandManager.h"
 
 using namespace std;
 
@@ -38,6 +39,7 @@ private:
     AccountingManager accountingManager;
     AppointmentManager appointmentManager;
     PatientManager patientManager;
+    CommandManager commandManager;
 
     void log(string message);
 
@@ -75,6 +77,8 @@ public:
     AppointmentManager getAppointmentManager();
 
     PatientManager getPatientManager();
+
+    CommandManager getCommandManager();
 };
 
 Application::Application(string name, bool debug) {
@@ -94,9 +98,11 @@ void Application::init() {
             this->accountingManager = AccountingManager(this);
             this->appointmentManager = AppointmentManager(this);
             this->patientManager = PatientManager(this);
+            this->commandManager = CommandManager(this);
             addModule(accountingManager);
             addModule(appointmentManager);
             addModule(patientManager);
+            addModule(commandManager);
         } catch (ModuleFailedLoading &e) {
             log(e.getMessage());
         }
@@ -104,6 +110,7 @@ void Application::init() {
         string startTimeMsg;
         startTimeMsg = "Application started in [" + to_string((finishTime - startTime)) + "] ms.";
         if (isDebug()) log(startTimeMsg);
+        commandManager.menu();
     }
 }
 
@@ -183,6 +190,10 @@ AppointmentManager Application::getAppointmentManager() {
 
 PatientManager Application::getPatientManager() {
     return this->patientManager;
+}
+
+CommandManager Application::getCommandManager() {
+    return this->commandManager
 }
 
 
