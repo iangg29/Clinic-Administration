@@ -59,6 +59,10 @@ Ver [UML.jpeg](UML.jpeg)
 
 * **Ian García** - [iangg29](https://github.com/iangg29)
 
+## Referencias 📃
+
+CPlusPlus (2020) unordered_map. https://www.cplusplus.com/reference/unordered_map/unordered_map/
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (GNU General Public License v3.0) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
