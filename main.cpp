@@ -12,6 +12,16 @@
 
 #include "Application.h"
 
+/*
+ * @file main.cpp
+ * @author Ian
+ * */
+
+
+/*
+ * Método inicial de la aplicación
+ * Crea la instancia principal y la inicia.
+ * */
 int main() {
     Application("Clinic Administration", true).init();
     return 0;

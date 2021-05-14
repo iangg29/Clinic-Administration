@@ -13,11 +13,22 @@
 #ifndef CLINICADMINISTRATION_ISTART_H
 #define CLINICADMINISTRATION_ISTART_H
 
+/*
+ * iStart: Interfaz para heredar método de inicio y fin.
+ * @file iStart.h
+ * @author Ian
+ * */
 
 class iStart {
 public:
+    /*
+     * Método de inicio.
+     */
     virtual void start() = 0;
 
+    /*
+     * Método de finalizar.
+     */
     virtual void end() = 0;
 };
 
