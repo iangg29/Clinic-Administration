@@ -35,10 +35,10 @@ protected:
 
     void logFatal(string message);
 
-    Module(Application *app, string display);
-
 public:
     explicit Module(string display);
+
+    Module(Application *app, string display);
 
     virtual void start() override;
 
@@ -76,14 +76,13 @@ Module::Module(Application *app, string display) {
 void Module::start() {
     if (!isStarted()) {
         setStarted(true);
-        log("MODULO INICIADO...");
+        log(getDisplay().append(" module loaded successfully!"));
     }
 }
 
 void Module::end() {
     if (isStarted()) {
         setStarted(false);
-        log("MODULO CERRADO...");
     }
 }
 

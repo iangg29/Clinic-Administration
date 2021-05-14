@@ -17,7 +17,9 @@
 #include <string>
 #include <vector>
 #include "Module.h"
-#include "modules/TestModule.h"
+#include "accounting/AccountingManager.h"
+#include "appointments/AppointmentManager.h"
+#include "patients/PatientManager.h"
 #include "exceptions/ModuleFailedLoading.h"
 
 using namespace std;
@@ -26,16 +28,18 @@ class Application {
 private:
     string name;
     string author;
-    float version;
+    double version;
     bool debug;
     bool started;
     unsigned int startTime;
     unsigned int finishTime;
     vector<Module> modules;
 
-    void log(string message);
+    AccountingManager accountingManager;
+    AppointmentManager appointmentManager;
+    PatientManager patientManager;
 
-    TestModule testModule;
+    void log(string message);
 
 public:
     Application(string name, bool debug);
@@ -44,17 +48,21 @@ public:
 
     void end();
 
-    string getName();
-
-    string getAuthor();
-
-    float getVersion();
-
     bool isDebug();
 
     bool isStarted();
 
     void setStarted(bool started);
+
+    void addModule(Module &module);
+
+    void appInfo();
+
+    string getName();
+
+    string getAuthor();
+
+    double getVersion();
 
     int getStartTime();
 
@@ -62,9 +70,11 @@ public:
 
     vector<Module> getModules();
 
-    void addModule(Module &module);
+    AccountingManager getAccountingManager();
 
-    TestModule getTestModule();
+    AppointmentManager getAppointmentManager();
+
+    PatientManager getPatientManager();
 };
 
 Application::Application(string name, bool debug) {
@@ -77,16 +87,23 @@ Application::Application(string name, bool debug) {
 void Application::init() {
     if (!isStarted()) {
         this->startTime = TimeUtil().getMillis();
+        appInfo();
         setStarted(true);
         try {
-            this->testModule = TestModule(this);
-            addModule(testModule);
+            log("Cargando módulos...");
+            this->accountingManager = AccountingManager(this);
+            this->appointmentManager = AppointmentManager(this);
+            this->patientManager = PatientManager(this);
+            addModule(accountingManager);
+            addModule(appointmentManager);
+            addModule(patientManager);
         } catch (ModuleFailedLoading &e) {
             log(e.getMessage());
         }
-        log("INIT!");
         this->finishTime = TimeUtil().getMillis();
-        if (isDebug()) cout << "Application started in [" << (finishTime - startTime) << "]ms." << endl;
+        string startTimeMsg;
+        startTimeMsg = "Application started in [" + to_string((finishTime - startTime)) + "] ms.";
+        if (isDebug()) log(startTimeMsg);
     }
 }
 
@@ -100,6 +117,14 @@ void Application::end() {
     }
 }
 
+void Application::appInfo() {
+    string message, authorMsg;
+    message = getName() + " iniciando...";
+    authorMsg = "Creado por " + getAuthor() + ".";
+    log(message);
+    log(authorMsg);
+}
+
 string Application::getName() {
     return this->name;
 }
@@ -108,7 +133,7 @@ string Application::getAuthor() {
     return this->author;
 }
 
-float Application::getVersion() {
+double Application::getVersion() {
     return this->version;
 }
 
@@ -148,8 +173,16 @@ void Application::addModule(Module &module) {
     }
 }
 
-TestModule Application::getTestModule() {
-    return this->testModule;
+AccountingManager Application::getAccountingManager() {
+    return this->accountingManager;
+}
+
+AppointmentManager Application::getAppointmentManager() {
+    return this->appointmentManager;
+}
+
+PatientManager Application::getPatientManager() {
+    return this->patientManager;
 }
 
 
