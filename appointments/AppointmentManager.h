@@ -113,7 +113,7 @@ void AppointmentManager::logAppointment(Appointment &appointment) {
     int newID = getCount() + 1;
     appointment.setID(newID);
     getAppointments().insert(make_pair(newID, appointment));
-    setCount(newID)
+    setCount(newID);
 }
 
 
