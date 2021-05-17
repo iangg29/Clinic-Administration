@@ -9,10 +9,21 @@
 // Copyright © 2021. All rights reserved.
 //
 //
+#include "Application.h"
 
-#include <iostream>
+/*
+ * @file main.cpp
+ * @author Ian
+ * */
 
+Application *application = nullptr;
+
+/*
+ * Método inicial de la aplicación
+ * Crea la instancia principal y la inicia.
+ * */
 int main() {
-    // NEW PROJECT!
+    application = new Application("Clinic Administration", true);
+    application->init();
     return 0;
 }
