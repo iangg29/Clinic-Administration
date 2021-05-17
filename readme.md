@@ -7,7 +7,9 @@
 #### TC1030
 _Proyecto para la materia de POO, en C++._
 
-### 🚨🚨 **IMPORTANTE** Versión *BETA* se encuentra en rama *development*. 🚨🚨
+### Contexto 🔍
+
+Este programa escrito en C++ 11 trata de poder facilitar el registro de pacientes, consultas y contabilidad de una clínica médica por medio de registros e historial de los mismos. Al ser una versión inicial no cuenta con una interfaz (GUI), sin embargo el programa es completamente funcional. Este software tiene bastante capacidad para expandirse por lo que cualquiera es libre de modificar/agregar cosas siguiendo los términos de la [licencia](LICENSE.md). 
 
 ### Pre-requisitos 📋
 
@@ -45,7 +47,7 @@ _Ejecutar_
     a.exe
 ```
 
-## Diagrama UML
+## Diagrama UML 🧭
 
 <p align="center">
     <img src="UML.jpeg" alt="Diagrama UML">
@@ -63,7 +65,7 @@ Ver [UML.jpeg](UML.jpeg)
 
 ## Referencias 📃
 
-CPlusPlus (2020) unordered_map. https://www.cplusplus.com/reference/unordered_map/unordered_map/
+CPlusPlus (2020) vector. https://www.cplusplus.com/reference/vector/vector/
 
 ## Licencia 📄
 

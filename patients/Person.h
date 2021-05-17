@@ -38,7 +38,7 @@ enum class Gender {
 };
 
 class Person {
-private:
+protected:
     string name;
     int age;
     Gender gender;

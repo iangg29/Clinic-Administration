@@ -97,7 +97,7 @@ public:
 Application::Application(string name, bool debug) {
     this->name = name;
     this->author = "Ian García";
-    this->version = 0.1;
+    this->version = 1.0;
     this->debug = debug;
 }
 
