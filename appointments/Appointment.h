@@ -30,13 +30,13 @@ private:
     int ID;
     Specialty specialty;
     int day;
-    string month;
+    int month;
     Doctor doctor;
-    Patient patient;
+    Patient *patient;
     int cost;
     bool active;
 public:
-    Appointment(int day, string month, int cost, Specialty specialty, Doctor doctor, Patient patient);
+    Appointment(int day, int month, int cost, Specialty specialty, Doctor doctor, Patient *patient);
 
     void reserve();
 
@@ -52,9 +52,9 @@ public:
 
     void setDay(int day);
 
-    string getMonth();
+    int getMonth();
 
-    void setMonth(string month);
+    void setMonth(int month);
 
     int getCost();
 
@@ -72,9 +72,13 @@ public:
 
     void setDoctor(Doctor doctor);
 
-    Patient getPatient();
+    Patient *getPatient();
 
-    void setPatient(Patient patient);
+    void setPatient(Patient *patient);
+
+    void printShort();
+
+    void printComplete();
 };
 
 /**
@@ -86,7 +90,7 @@ public:
  * @param doctor Doctor que realizará la consulta.
  * @param patient Paciente que asistirá.
  * */
-Appointment::Appointment(int day, string month, int cost, Specialty specialty, Doctor doctor, Patient patient) {
+Appointment::Appointment(int day, int month, int cost, Specialty specialty, Doctor doctor, Patient *patient) {
     this->ID = 0;
     this->day = day;
     this->month = month;
@@ -154,7 +158,7 @@ void Appointment::setDay(int day) {
  * Obtiene el mes de la consulta.
  * @return Mes
  * */
-string Appointment::getMonth() {
+int Appointment::getMonth() {
     return this->month;
 }
 
@@ -162,7 +166,7 @@ string Appointment::getMonth() {
  * Asigna el mes a la consulta.
  * @param month Mes
  * */
-void Appointment::setMonth(string month) {
+void Appointment::setMonth(int month) {
     this->month = month;
 }
 
@@ -233,7 +237,7 @@ void Appointment::setDoctor(Doctor doctor) {
 /**
  * Obtiene el paciente de la consulta.
  * */
-Patient Appointment::getPatient() {
+Patient *Appointment::getPatient() {
     return this->patient;
 }
 
@@ -241,9 +245,22 @@ Patient Appointment::getPatient() {
  * Asigna el paciente de la consulta.
  * @param patient Paciente
  * */
-void Appointment::setPatient(Patient patient) {
+void Appointment::setPatient(Patient *patient) {
     this->patient = patient;
 }
 
+void Appointment::printShort() {
+    cout << "(ID:" << getID() << ") Fecha: " << getDay() << "/" << getMonth() << " :: Paciente: "
+         << getPatient()->getName() << "." << endl;
+}
+
+void Appointment::printComplete() {
+    cout << "---- ==== CONSULTA [" << getID() << "] ==== ----" << endl;
+    cout << "Fecha: " << getDay() << "/" << getMonth() << endl;
+    cout << "Costo: $" << getCost() << endl;
+    cout << "Especialidad: " << getSpecialty().getName() << endl;
+    cout << "Paciente: " << getPatient()->getName() << " [ID:" << getPatient()->getId() << "]" << endl;
+    cout << "__________________________________" << endl;
+}
 
 #endif //CLINICADMINISTRATION_APPOINTMENT_H

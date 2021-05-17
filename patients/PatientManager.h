@@ -46,11 +46,11 @@ public:
 
     void setCount(int count);
 
-    void registerPatient(Patient *patient);
+    void registerPatient(Patient *patient, bool silent);
 
     void unregisterPatient();
 
-    void searchPatient();
+    Patient *searchPatient();
 
     void printRecord();
 
@@ -88,14 +88,16 @@ void PatientManager::end() {
  * Registra un nuevo paciente en el mapa.
  * @param patient Paciente a registrar
  * */
-void PatientManager::registerPatient(Patient *patient) {
+void PatientManager::registerPatient(Patient *patient, bool silent = false) {
     if (patient) {
         int newID = getCount() + 1;
         patient->setId(newID);
         setCount(newID);
         patients.push_back(patient);
-        log("PatientManager :: RegisterPatient :: COMPLETE");
-        cout << "(ID:" << patient->getId() << ") Nombre: " << patient->getName() << "." << endl;
+        if (!silent) {
+            log("PatientManager :: RegisterPatient :: COMPLETE");
+            cout << "(ID:" << patient->getId() << ") Nombre: " << patient->getName() << "." << endl;
+        }
     }
 }
 
@@ -116,16 +118,16 @@ void PatientManager::unregisterPatient() {
     }
 }
 
-void PatientManager::searchPatient() {
+Patient *PatientManager::searchPatient() {
     int ID = askID();
-    if (patients.empty()) return;
-    if (ID <= 0) return;
-    for (Patient *patient : patients) {
-        if (patient->getId() == ID) {
-            patient->printComplete();
-            break;
+    if (!patients.empty() && ID > 0) {
+        for (Patient *patient : patients) {
+            if (patient->getId() == ID) {
+                return patient;
+            }
         }
     }
+    return nullptr;
 }
 
 /**

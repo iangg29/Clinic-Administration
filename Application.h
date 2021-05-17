@@ -79,6 +79,8 @@ public:
     PatientManager *getPatientManager();
 
     CommandManager *getCommandManager();
+
+    void loadSampleData();
 };
 
 Application::Application(string name, bool debug) {
@@ -112,6 +114,7 @@ void Application::init() {
         } catch (ModuleFailedLoading &e) {
             log(e.getMessage());
         }
+        if (isDebug()) loadSampleData();
         this->finishTime = TimeUtil().getMillis();
         string startTimeMsg;
         startTimeMsg = "Application started in [" + to_string((finishTime - startTime)) + "] ms.";
@@ -140,7 +143,7 @@ void Application::init() {
                             getPatientManager()->unregisterPatient();
                             break;
                         case 3:
-                            getPatientManager()->searchPatient();
+                            getPatientManager()->searchPatient()->printComplete();
                             break;
                         case 4:
                             getPatientManager()->printRecord();
@@ -152,14 +155,30 @@ void Application::init() {
                     }
                     break;
                 case 2:
-                    getPatientManager()->menu();
+                    getAppointmentManager()->menu();
                     while (!(cin >> internal)) {
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         log("Opción inválida, por favor ingresa un número!");
                     }
                     switch (internal) {
-
+                        case 1:
+                            getAppointmentManager()->printLog();
+                            break;
+                        case 2:
+                            getAppointmentManager()->bookAppointment(getAppointmentManager()->createBaseAppointment(
+                                    getPatientManager()));
+                            break;
+                        case 3:
+                            getAppointmentManager()->searchAppointment()->printComplete();
+                            break;
+                        case 4:
+                            // TODO: PAY
+                            break;
+                        case 5:
+                            continue;
+                        default:
+                            continue;
                     }
                     break;
                 case 3:
@@ -201,6 +220,7 @@ void Application::appInfo() {
     authorMsg = "Creado por " + getAuthor() + ".";
     log(message);
     log(authorMsg);
+    if (isDebug()) log("Iniciado en modo DEBUG! (Expect Sample DATA to load).");
 }
 
 string Application::getName() {
@@ -260,6 +280,25 @@ PatientManager *Application::getPatientManager() {
 
 CommandManager *Application::getCommandManager() {
     return this->commandManager;
+}
+
+void Application::loadSampleData() {
+    getPatientManager()->registerPatient(
+            new Patient("Ian", 18, Gender::MALE, "Mexicana", "4315531315", "ian@gmail.com", false, false,
+                        false), true);
+    getPatientManager()->registerPatient(
+            new Patient("Erick", 19, Gender::MALE, "Mexicana", "35236246", "erick@gmail.com", true, false,
+                        false), true);
+    getPatientManager()->registerPatient(
+            new Patient("Said", 21, Gender::MALE, "Mexicana", "6457364234", "said@gmail.com", false, false,
+                        false), true);
+    getPatientManager()->registerPatient(
+            new Patient("José", 19, Gender::MALE, "Mexicana", "5735574335", "jose@gmail.com", false, true,
+                        false), true);
+    getPatientManager()->registerPatient(
+            new Patient("Ramón", 18, Gender::MALE, "Mexicana", "26264462", "ramon@gmail.com", true, false,
+                        false), true);
+    log("Sample DATA loaded successfully!");
 }
 
 
