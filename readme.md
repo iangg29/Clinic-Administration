@@ -31,7 +31,7 @@ _Ir al proyecto descargado_
 _Compilar programa_
 
 ```shell
-    g++ main.cpp
+    g++ -std=c++11 main.cpp
 ```
 
 _Ejecutar_
