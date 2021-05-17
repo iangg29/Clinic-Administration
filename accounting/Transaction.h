@@ -54,6 +54,8 @@ public:
     TransactionType getType();
 
     void setType(TransactionType type);
+
+    void print();
 };
 
 /**
@@ -113,6 +115,13 @@ TransactionType Transaction::getType() {
  * */
 void Transaction::setType(TransactionType type) {
     this->type = type;
+}
+
+void Transaction::print() {
+    string outcome = "[-]";
+    string income = "[+]";
+    cout << (getType() == TransactionType::INCOME ? income : outcome) << " " << getReason() << " MONTO: $" << getValue()
+         << "." << endl;
 }
 
 #endif //CLINICADMINISTRATION_TRANSACTION_H

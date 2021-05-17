@@ -173,7 +173,7 @@ void Application::init() {
                             getAppointmentManager()->searchAppointment()->printComplete();
                             break;
                         case 4:
-                            // TODO: PAY
+                            getAppointmentManager()->searchAppointment()->pay(getAccountingManager());
                             break;
                         case 5:
                             continue;
@@ -189,7 +189,16 @@ void Application::init() {
                         log("Opción inválida, por favor ingresa un número!");
                     }
                     switch (internal) {
-
+                        case 1:
+                            getAccountingManager()->printBalance();
+                            break;
+                        case 2:
+                            getAccountingManager()->printHistorical();
+                            break;
+                        case 3:
+                            continue;
+                        default:
+                            continue;
                     }
                     break;
                 case 4:

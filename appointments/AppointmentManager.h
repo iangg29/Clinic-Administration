@@ -113,7 +113,7 @@ void AppointmentManager::bookAppointment(Appointment *appointment, bool silent =
                 log("AppointmentManager :: BookAppointment :: COMPLETE");
                 cout << "La consulta ha sido agendada para el " << appointment->getDay() << "/"
                      << appointment->getMonth()
-                     << "." << endl;
+                     << ". (ID:" << appointment->getID() << ")." << endl;
             }
         } else {
             logWarn("No se ha encontrado el usuario con ese ID.");

@@ -42,7 +42,7 @@ public:
 
     void cancel();
 
-    void pay();
+    void pay(AccountingManager *accountingManager);
 
     int getID();
 
@@ -118,8 +118,8 @@ void Appointment::cancel() {
 /**
  * Método para pagar la consulta.
  * */
-void Appointment::pay() {
-    // TODO: Transaction
+void Appointment::pay(AccountingManager *accountingManager) {
+    accountingManager->addTransaction(new Transaction((float) getCost(), "Pago Consulta", TransactionType::INCOME));
 }
 
 /**

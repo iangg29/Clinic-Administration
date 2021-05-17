@@ -29,6 +29,7 @@ const string NAME_ACCOUNTING = "Accounting Manager";
 class AccountingManager : public Module {
 private:
     float balance;
+    vector<Transaction *> transactions;
 public:
     AccountingManager();
 
@@ -42,7 +43,11 @@ public:
 
     float setBalance(float balance);
 
-    void addTransaction(Transaction transaction);
+    void addTransaction(Transaction *transaction);
+
+    void printBalance();
+
+    void printHistorical();
 };
 
 /**
@@ -74,7 +79,12 @@ void AccountingManager::end() {
  * Despliega el menú del módulo.
  * */
 void AccountingManager::menu() {
-
+    cout << "---- ==== CONTABILIDAD ==== ----" << endl;
+    cout << "Selecciona una opción:" << endl;
+    cout << "1. Mostrar balance" << endl;
+    cout << "2. Ver historial" << endl;
+    cout << "3. Regresar" << endl;
+    cout << "-----------------------------" << endl;
 }
 
 /**
@@ -97,8 +107,34 @@ float AccountingManager::setBalance(float balance) {
  * Agrega una transacción modificando el balance general.
  * @param transaction Transacción
  * */
-void AccountingManager::addTransaction(Transaction transaction) {
-    // TODO: Transaction logic.
+void AccountingManager::addTransaction(Transaction *transaction) {
+    if (transaction) {
+        float newBalance;
+        if (transaction->getType() == TransactionType::INCOME) {
+            newBalance = getBalance() + transaction->getValue();
+            setBalance(newBalance);
+        } else {
+            newBalance = getBalance() - transaction->getValue();
+            setBalance(newBalance);
+        }
+        log("Se ha actualizado el balance financiero.");
+        transactions.push_back(transaction);
+    }
+}
+
+void AccountingManager::printBalance() {
+    cout << "El balance de la clínica es de $" << getBalance() << "MXN." << endl;
+}
+
+void AccountingManager::printHistorical() {
+    if (transactions.empty()) {
+        logWarn("No se encontraron transacciones.");
+    } else {
+        cout << "---- ==== TRANSACCIONES ==== ----" << endl;
+        for (Transaction *transaction : transactions) {
+            transaction->print();
+        }
+    }
 }
 
 
