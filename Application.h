@@ -34,17 +34,19 @@ private:
     bool started;
     unsigned int startTime;
     unsigned int finishTime;
-    vector<Module> modules;
+    vector<Module *> modules;
 
-    AccountingManager accountingManager;
-    AppointmentManager appointmentManager;
-    PatientManager patientManager;
-    CommandManager commandManager;
+    AccountingManager *accountingManager;
+    AppointmentManager *appointmentManager;
+    PatientManager *patientManager;
+    CommandManager *commandManager;
 
     void log(string message);
 
 public:
     Application(string name, bool debug);
+
+    ~Application();
 
     void init();
 
@@ -56,7 +58,7 @@ public:
 
     void setStarted(bool started);
 
-    void addModule(Module &module);
+    void addModule(Module *module);
 
     void appInfo();
 
@@ -70,15 +72,13 @@ public:
 
     int getFinishTime();
 
-    vector<Module> getModules();
+    AccountingManager *getAccountingManager();
 
-    AccountingManager getAccountingManager();
+    AppointmentManager *getAppointmentManager();
 
-    AppointmentManager getAppointmentManager();
+    PatientManager *getPatientManager();
 
-    PatientManager getPatientManager();
-
-    CommandManager getCommandManager();
+    CommandManager *getCommandManager();
 };
 
 Application::Application(string name, bool debug) {
@@ -88,6 +88,12 @@ Application::Application(string name, bool debug) {
     this->debug = debug;
 }
 
+Application::~Application() {
+    for (Module *module : modules) {
+        delete module;
+    }
+}
+
 void Application::init() {
     if (!isStarted()) {
         this->startTime = TimeUtil().getMillis();
@@ -95,10 +101,10 @@ void Application::init() {
         setStarted(true);
         try {
             log("Cargando módulos...");
-            this->accountingManager = AccountingManager(this);
-            this->appointmentManager = AppointmentManager(this);
-            this->patientManager = PatientManager(this);
-            this->commandManager = CommandManager(this);
+            this->accountingManager = new AccountingManager();
+            this->appointmentManager = new AppointmentManager();
+            this->patientManager = new PatientManager();
+            this->commandManager = new CommandManager();
             addModule(accountingManager);
             addModule(appointmentManager);
             addModule(patientManager);
@@ -110,17 +116,67 @@ void Application::init() {
         string startTimeMsg;
         startTimeMsg = "Application started in [" + to_string((finishTime - startTime)) + "] ms.";
         if (isDebug()) log(startTimeMsg);
-        commandManager.menu();
+        while (isStarted()) {
+            int option, internal = 0;
+            getCommandManager()->menu();
+            while (!(cin >> option)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                log("Opción inválida, por favor ingresa un número!");
+            }
+            switch (option) {
+                case 1:
+                    getPatientManager()->menu();
+                    while(!(cin>>internal)){
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        log("Opción inválida, por favor ingresa un número!");
+                    }
+                    switch (internal) {
+                        
+                    }
+                    break;
+                case 2:
+                    getPatientManager()->menu();
+                    while(!(cin>>internal)){
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        log("Opción inválida, por favor ingresa un número!");
+                    }
+                    switch (internal) {
+
+                    }
+                    break;
+                case 3:
+                    getAccountingManager()->menu();
+                    while(!(cin>>internal)){
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        log("Opción inválida, por favor ingresa un número!");
+                    }
+                    switch (internal) {
+
+                    }
+                    break;
+                case 4:
+                    end();
+                    break;
+                default:
+                    log("Por favor ingresa una opción correcta!");
+                    break;
+            }
+        }
     }
 }
 
 void Application::end() {
     if (isStarted()) {
         setStarted(false);
-        log("ENDED!");
-        for (Module &module : getModules()) {
-            module.end();
+        if (isDebug()) log("Cerrando módulos...");
+        for (Module *module : modules) {
+            module->end();
         }
+        log("Aplicación finalizada con éxito.");
     }
 }
 
@@ -168,32 +224,27 @@ void Application::setStarted(bool started) {
     this->started = started;
 }
 
-vector<Module> Application::getModules() {
-    return this->modules;
-}
 
-void Application::addModule(Module &module) {
-    try {
-        getModules().push_back(module);
-    } catch (exception exception) {
-        throw ModuleFailedLoading();
+void Application::addModule(Module *module) {
+    if (module) {
+        modules.push_back(module);
     }
 }
 
-AccountingManager Application::getAccountingManager() {
+AccountingManager *Application::getAccountingManager() {
     return this->accountingManager;
 }
 
-AppointmentManager Application::getAppointmentManager() {
+AppointmentManager *Application::getAppointmentManager() {
     return this->appointmentManager;
 }
 
-PatientManager Application::getPatientManager() {
+PatientManager *Application::getPatientManager() {
     return this->patientManager;
 }
 
-CommandManager Application::getCommandManager() {
-    return this->commandManager
+CommandManager *Application::getCommandManager() {
+    return this->commandManager;
 }
 
 

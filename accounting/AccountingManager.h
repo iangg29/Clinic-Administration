@@ -32,11 +32,11 @@ private:
 public:
     AccountingManager();
 
-    explicit AccountingManager(Application *app);
-
     void start() override;
 
     void end() override;
+
+    void menu() override;
 
     float getBalance();
 
@@ -48,13 +48,7 @@ public:
 /**
  * Constructor de la clase sin parámetros.
  * */
-AccountingManager::AccountingManager() : Module(NAME_ACCOUNTING) {}
-
-/**
- * Constructor principal de la clase con parámetros.
- * @param app Instancia de la aplicación principal.
- * */
-AccountingManager::AccountingManager(Application *app) : Module(app, NAME_ACCOUNTING) {
+AccountingManager::AccountingManager() : Module(NAME_ACCOUNTING) {
     try {
         start();
     } catch (exception exception) {
@@ -74,7 +68,13 @@ void AccountingManager::start() {
  * */
 void AccountingManager::end() {
     Module::end();
-    log("CLEARING CACHE!");
+}
+
+/**
+ * Despliega el menú del módulo.
+ * */
+void AccountingManager::menu() {
+
 }
 
 /**

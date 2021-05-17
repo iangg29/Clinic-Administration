@@ -15,30 +15,29 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include "../Module.h"
 
-const NAME_CLI = "CLI Manager";
+const string NAME_CLI = "CLI Manager";
 
 class CommandManager : public Module {
 public:
     CommandManager();
 
-    explicit CommandManager(Application *app);
-
     void start() override;
 
     void end() override;
 
-    static void menu();
+    void menu() override;
+
+    bool confirm();
 };
 
-CommandManager::CommandManager() : Module(NAME_CLI) {}
-
-CommandManager::CommandManager(Application *app) : Module(app, NAME_CLI) {
+CommandManager::CommandManager() : Module(NAME_CLI) {
     try {
         start();
     } catch (exception exception) {
-        logWarn("Module couldn't be loaded!")
+        logWarn("Module couldn't be loaded!");
     }
 }
 
@@ -51,7 +50,24 @@ void CommandManager::end() {
 }
 
 void CommandManager::menu() {
-    cout << "MENU??" << endl;
+    cout << "---- ==== MENU ==== ----" << endl;
+    cout << "Selecciona una opción:" << endl;
+    cout << "1. Pacientes" << endl;
+    cout << "2. Consultas" << endl;
+    cout << "3. Contabilidad" << endl;
+    cout << "4. Salir" << endl;
+    cout << "------------------------" << endl;
+}
+
+bool CommandManager::confirm() {
+    string answer;
+    log("¿Estás seguro de realizar esta acción? (y/n)");
+    cin >> answer;
+    transform(answer.begin(), answer.end(), answer.begin(), ::toupper);
+    if (answer.find('Y', 0) == 0) {
+        return true;
+    }
+    return false;
 }
 
 

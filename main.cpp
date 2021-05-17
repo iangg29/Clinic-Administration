@@ -9,7 +9,6 @@
 // Copyright © 2021. All rights reserved.
 //
 //
-
 #include "Application.h"
 
 /*
@@ -17,12 +16,14 @@
  * @author Ian
  * */
 
+Application *application = nullptr;
 
 /*
  * Método inicial de la aplicación
  * Crea la instancia principal y la inicia.
  * */
 int main() {
-    Application("Clinic Administration", true).init();
+    application = new Application("Clinic Administration", true);
+    application->init();
     return 0;
 }

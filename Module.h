@@ -20,11 +20,8 @@
 
 using namespace std;
 
-class Application;
-
 class Module : public iStart {
 private:
-    Application *app;
     string display;
     int startupTime;
     bool started;
@@ -36,13 +33,13 @@ protected:
     void logFatal(string message);
 
 public:
-    explicit Module(string display);
-
-    Module(Application *app, string display);
+    Module(string display);
 
     virtual void start() override;
 
     virtual void end() override;
+
+    virtual void menu();
 
     string getDisplay();
 
@@ -51,18 +48,9 @@ public:
     bool isStarted();
 
     void setStarted(bool started);
-
-    Application *getApplication();
 };
 
 Module::Module(string display) {
-    this->display = display;
-    this->startupTime = TimeUtil().getMillis();
-    this->started = false;
-}
-
-Module::Module(Application *app, string display) {
-    this->app = app;
     this->display = display;
     this->startupTime = TimeUtil().getMillis();
     this->started = false;
@@ -114,8 +102,7 @@ void Module::logFatal(string message) {
     cout << "[ERROR] " << message << endl;
 }
 
-Application *Module::getApplication() {
-    return this->app;
+void Module::menu() {
 }
 
 #endif //CLINICADMINISTRATION_MODULE_H

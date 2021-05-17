@@ -34,11 +34,11 @@ private:
 public:
     AppointmentManager();
 
-    explicit AppointmentManager(Application *app);
-
     void start() override;
 
     void end() override;
+
+    void menu() override;
 
     unordered_map<int, Appointment> getAppointments();
 
@@ -52,19 +52,14 @@ public:
 /**
  * Constructor de la clase sin parámetros.
  * */
-AppointmentManager::AppointmentManager() : Module(NAME_APPOINTMENT) {}
-
-/**
- * Consturctor princiapal de la clase con parámetros.
- * @param app Instancia de la aplicación principal
- * */
-AppointmentManager::AppointmentManager(Application *app) : Module(app, NAME_APPOINTMENT) {
+AppointmentManager::AppointmentManager() : Module(NAME_APPOINTMENT) {
     try {
         start();
     } catch (exception exception) {
         logWarn("Module couldn't load!");
     }
 }
+
 
 /**
  * Método inicial del módulo.
@@ -78,7 +73,6 @@ void AppointmentManager::start() {
  * */
 void AppointmentManager::end() {
     Module::end();
-    log("CLEARING CACHE!");
 }
 
 /**
@@ -114,6 +108,10 @@ void AppointmentManager::logAppointment(Appointment &appointment) {
     appointment.setID(newID);
     getAppointments().insert(make_pair(newID, appointment));
     setCount(newID);
+}
+
+void AppointmentManager::menu() {
+
 }
 
 

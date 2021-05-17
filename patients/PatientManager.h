@@ -26,6 +26,7 @@
  * @author Ian
  * */
 
+
 const string NAME_PATIENT = "Patient Manager";
 
 class PatientManager : public Module {
@@ -35,11 +36,11 @@ private:
 public:
     PatientManager();
 
-    explicit PatientManager(Application *app);
-
     void start() override;
 
     void end() override;
+
+    void menu() override;
 
     unordered_map<int, Patient> getPatients();
 
@@ -55,13 +56,7 @@ public:
 /**
  * Constructor de la clase sin parámetros.
  * */
-PatientManager::PatientManager() : Module(NAME_PATIENT) {}
-
-/**
- * Constructor principal de la clase con parámetros.
- * @param app Instancia de la aplicación principal.
- * */
-PatientManager::PatientManager(Application *app) : Module(app, NAME_PATIENT) {
+PatientManager::PatientManager() : Module(NAME_PATIENT) {
     try {
         start();
     } catch (exception exception) {
@@ -128,6 +123,9 @@ int PatientManager::getCount() {
  * */
 void PatientManager::setCount(int count) {
     this->count = count;
+}
+
+void PatientManager::menu() {
 }
 
 
