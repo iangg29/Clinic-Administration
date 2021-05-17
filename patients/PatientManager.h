@@ -60,7 +60,7 @@ public:
 };
 
 /**
- * Constructor de la clase sin parámetros.
+ * Constructor principal de la clase.
  * */
 PatientManager::PatientManager() : Module(NAME_PATIENT) {
     try {
@@ -118,6 +118,10 @@ void PatientManager::unregisterPatient() {
     }
 }
 
+/**
+ * Método para buscar a un paciente por su ID.
+ * @return Paciente
+ * */
 Patient *PatientManager::searchPatient() {
     int ID = askID();
     if (!patients.empty() && ID > 0) {
@@ -146,6 +150,9 @@ void PatientManager::setCount(int count) {
     this->count = count;
 }
 
+/**
+ * Imprime el menú del módulo.
+ * */
 void PatientManager::menu() {
     cout << "---- ==== PACIENTES ==== ----" << endl;
     cout << "Selecciona una opción:" << endl;
@@ -157,6 +164,9 @@ void PatientManager::menu() {
     cout << "-----------------------------" << endl;
 }
 
+/**
+ * Imprime el registro general de pacientes.
+ * */
 void PatientManager::printRecord() {
     if (patients.empty()) {
         log("El registro de pacientes está vacío.");
@@ -168,6 +178,10 @@ void PatientManager::printRecord() {
     }
 }
 
+/**
+ * Método para crear un paciente con preguntas al usuario. (CLI)
+ * @return Paciente
+ * */
 Patient *PatientManager::createPatient() {
     Gender gen;
     string name, nationality, celular, email, gender;
@@ -196,6 +210,10 @@ Patient *PatientManager::createPatient() {
                        chronic);
 }
 
+/**
+ * Método para obtener el ID mediante CLI.
+ * @return ID
+ * */
 int PatientManager::askID() {
     int ID;
     cout << "Ingresa el ID del paciente: ";

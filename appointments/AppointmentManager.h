@@ -57,7 +57,7 @@ public:
 };
 
 /**
- * Constructor de la clase sin parámetros.
+ * Constructor principal de la clase.
  * */
 AppointmentManager::AppointmentManager() : Module(NAME_APPOINTMENT) {
     try {
@@ -121,6 +121,9 @@ void AppointmentManager::bookAppointment(Appointment *appointment, bool silent =
     }
 }
 
+/**
+ * Imprime el menú del módulo.
+ * */
 void AppointmentManager::menu() {
     cout << "---- ==== CONSULTAS ==== ----" << endl;
     cout << "Selecciona una opción:" << endl;
@@ -132,6 +135,9 @@ void AppointmentManager::menu() {
     cout << "-----------------------------" << endl;
 }
 
+/**
+ * Imprime la agenda de la clínica.
+ * */
 void AppointmentManager::printLog() {
     if (appointments.empty()) {
         log("La agenda de consultas está vacía.");
@@ -143,6 +149,10 @@ void AppointmentManager::printLog() {
     }
 }
 
+/**
+ * Pregunta al usuario el ID.
+ * @return ID
+ * */
 int AppointmentManager::askID() {
     int ID;
     cout << "Ingresa el ID de la consulta: ";
@@ -150,6 +160,10 @@ int AppointmentManager::askID() {
     return ID;
 }
 
+/**
+ * Crea una consulta base con preguntas al usuario. (CLI)
+ * @return Consulta
+ * */
 Appointment *AppointmentManager::createBaseAppointment(PatientManager *patientManager) {
     int day, month, cost;
     string specialty, doctor;
@@ -166,6 +180,10 @@ Appointment *AppointmentManager::createBaseAppointment(PatientManager *patientMa
     return new Appointment(day, month, cost, Specialty(specialty), Doctor(), patientManager->searchPatient());
 }
 
+/**
+ * Busca una consulta por medio de su ID.
+ * @return Consulta
+ * */
 Appointment *AppointmentManager::searchAppointment() {
     int ID = askID();
     if (!appointments.empty() && ID > 0) {

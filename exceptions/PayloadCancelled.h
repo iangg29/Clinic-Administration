@@ -17,8 +17,8 @@
 #include <string>
 
 /*
- * ModuleFailedLoading: Excepción que generada cuando algún módulo no puede iniciar.
- * @file ModuleFailedLoading.h
+ * PayloadCancelled: Excepción que generada cuando el usuario cancela la acción.
+ * @file PayloadCancelled.h
  * @author Ian
  * */
 

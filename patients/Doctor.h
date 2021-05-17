@@ -38,7 +38,7 @@ public:
 };
 
 /**
- * Constructor de la clase sin parámetros.
+ * Constructor principal de la clase.
  * */
 Doctor::Doctor() {
     this->specialty = Specialty("NONE");

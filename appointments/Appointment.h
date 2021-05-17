@@ -105,18 +105,19 @@ Appointment::Appointment(int day, int month, int cost, Specialty specialty, Doct
  * Método para reservar la consulta.
  * */
 void Appointment::reserve() {
-
+    // V2 ??
 }
 
 /**
  * Método para cancelar la consulta.
  * */
 void Appointment::cancel() {
-
+    // V2 ??
 }
 
 /**
  * Método para pagar la consulta.
+ * @param accountingManager Manager de contabilidad.
  * */
 void Appointment::pay(AccountingManager *accountingManager) {
     accountingManager->addTransaction(new Transaction((float) getCost(), "Pago Consulta", TransactionType::INCOME));
@@ -249,11 +250,17 @@ void Appointment::setPatient(Patient *patient) {
     this->patient = patient;
 }
 
+/**
+ * Imprime pequeños detalles de la consulta.
+ * */
 void Appointment::printShort() {
     cout << "(ID:" << getID() << ") Fecha: " << getDay() << "/" << getMonth() << " :: Paciente: "
          << getPatient()->getName() << "." << endl;
 }
 
+/**
+ * Imprime la información completa de la consulta.
+ * */
 void Appointment::printComplete() {
     cout << "---- ==== CONSULTA [" << getID() << "] ==== ----" << endl;
     cout << "Fecha: " << getDay() << "/" << getMonth() << endl;

@@ -150,10 +150,16 @@ void Patient::setChronic(bool chronic) {
     this->chronic = chronic;
 }
 
+/**
+ * Imprime información resumida del paciente.
+ * */
 void Patient::printShort() {
     cout << "(ID:" << getId() << ") Nombre: " << getName() << ":: Edad: " << getAge() << "." << endl;
 }
 
+/**
+ * Imprime la información completa del paciente.
+ * */
 void Patient::printComplete() {
     cout << "---- ==== PACIENTE [" << getId() << "] ==== ----" << endl;
     cout << "Nombre: " << getName() << endl;

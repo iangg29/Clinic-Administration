@@ -117,6 +117,9 @@ void Transaction::setType(TransactionType type) {
     this->type = type;
 }
 
+/**
+ * Imprime información de la transacción.
+ * */
 void Transaction::print() {
     string outcome = "[-]";
     string income = "[+]";

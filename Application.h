@@ -23,6 +23,12 @@
 #include "exceptions/ModuleFailedLoading.h"
 #include "cli/CommandManager.h"
 
+/*
+ * Application: Core principal de la aplicación.
+ * @file Application.h
+ * @author Ian
+ * */
+
 using namespace std;
 
 class Application {
@@ -83,6 +89,11 @@ public:
     void loadSampleData();
 };
 
+/**
+ * Constructor principal de la aplicación.
+ * @param name Nombre
+ * @param debug Modo debug
+ * */
 Application::Application(string name, bool debug) {
     this->name = name;
     this->author = "Ian García";
@@ -90,12 +101,18 @@ Application::Application(string name, bool debug) {
     this->debug = debug;
 }
 
+/**
+ * Destructor de la aplicación.
+ * */
 Application::~Application() {
     for (Module *module : modules) {
         delete module;
     }
 }
 
+/**
+ * Método inicial de la aplicación.
+ * */
 void Application::init() {
     if (!isStarted()) {
         this->startTime = TimeUtil().getMillis();
@@ -212,6 +229,9 @@ void Application::init() {
     }
 }
 
+/**
+ * Método de finalización de la aplicación.
+ * */
 void Application::end() {
     if (isStarted()) {
         setStarted(false);
@@ -223,6 +243,9 @@ void Application::end() {
     }
 }
 
+/**
+ * Imprime información básica de la aplicación.
+ * */
 void Application::appInfo() {
     string message, authorMsg;
     message = getName() + " iniciando...";
@@ -232,65 +255,123 @@ void Application::appInfo() {
     if (isDebug()) log("Iniciado en modo DEBUG! (Expect Sample DATA to load).");
 }
 
+/**
+ * Obtiene el nombre de la aplicación.
+ * @return Nombre de la aplicación
+ * */
 string Application::getName() {
     return this->name;
 }
 
+/**
+ * Obtiene el nombre del autor.
+ * @return Nombre del autor
+ * */
 string Application::getAuthor() {
     return this->author;
 }
 
+/**
+ * Obtine la versión de la aplicación.
+ * @return Version
+ * */
 double Application::getVersion() {
     return this->version;
 }
 
+/**
+ * Obtiene si la aplicación está en modo debug.
+ * @return Debug mode
+ * */
 bool Application::isDebug() {
     return this->debug;
 }
 
+/**
+ * Obtiene si la aplicación está iniciada.
+ * @return Started
+ * */
 bool Application::isStarted() {
     return this->started;
 }
 
+/**
+ * Obtiene el tiempo de inicio de la aplicación (milisegundos).
+ * @return Time
+ * */
 int Application::getStartTime() {
     return this->startTime;
 }
 
+/**
+ * Obtiene el tiempo de finalización de inicio de la aplicación (milisegundos).
+ * @return Time
+ * */
 int Application::getFinishTime() {
     return this->finishTime;
 }
 
+/**
+ * Imprime un mensaje informativo al usuario.
+ * @param message Mensaje
+ * */
 void Application::log(string message) {
     cout << "[*] " << message << endl;
 }
 
+/**
+ * Asigna la aplicación a iniciada.
+ * @param started Started
+ * */
 void Application::setStarted(bool started) {
     this->started = started;
 }
 
-
+/**
+ * Agrega un módulo a la aplicación.
+ * @param module Módulo
+ * */
 void Application::addModule(Module *module) {
     if (module) {
         modules.push_back(module);
     }
 }
 
+/**
+ * Obtiene el Manager de Contabilidad.
+ * @return AccountingManager
+ * */
 AccountingManager *Application::getAccountingManager() {
     return this->accountingManager;
 }
 
+/**
+ * Obtiene el Manager de Consultas.
+ * @return AppointmentManager
+ * */
 AppointmentManager *Application::getAppointmentManager() {
     return this->appointmentManager;
 }
 
+/**
+ * Obtiene el Manager de Pacientes.
+ * @return PatientManager
+ * */
 PatientManager *Application::getPatientManager() {
     return this->patientManager;
 }
 
+/**
+ * Obtiene el Manager de Comandos.
+ * @return CommandManager
+ * */
 CommandManager *Application::getCommandManager() {
     return this->commandManager;
 }
 
+/**
+ * Añade datos de ejemplo a la aplicación.
+ * */
 void Application::loadSampleData() {
     getPatientManager()->registerPatient(
             new Patient("Ian", 18, Gender::MALE, "Mexicana", "4315531315", "ian@gmail.com", false, false,

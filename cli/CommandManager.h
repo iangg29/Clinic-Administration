@@ -18,6 +18,12 @@
 #include <algorithm>
 #include "../Module.h"
 
+/*
+ * CommandManager: Módulo que administra las interacciones del usuario con la aplicación.
+ * @file CommandManager.h
+ * @author Ian
+ * */
+
 const string NAME_CLI = "CLI Manager";
 
 class CommandManager : public Module {
@@ -33,6 +39,9 @@ public:
     bool confirm();
 };
 
+/**
+ * Constructor principal de la aplicación.
+ * */
 CommandManager::CommandManager() : Module(NAME_CLI) {
     try {
         start();
@@ -41,14 +50,24 @@ CommandManager::CommandManager() : Module(NAME_CLI) {
     }
 }
 
+/**
+ * Método inicial del módulo.
+ * */
 void CommandManager::start() {
     Module::start();
 }
 
+
+/**
+ * Método para finalización de módulo.
+ * */
 void CommandManager::end() {
     Module::end();
 }
 
+/**
+ * Imprime el menú del módulo.
+ * */
 void CommandManager::menu() {
     cout << "---- ==== MENU ==== ----" << endl;
     cout << "Selecciona una opción:" << endl;
@@ -59,6 +78,11 @@ void CommandManager::menu() {
     cout << "------------------------" << endl;
 }
 
+
+/**
+ * Método de ayuda para confirmar.
+ * @return Respuesta del usuario
+ * */
 bool CommandManager::confirm() {
     string answer;
     log("¿Estás seguro de realizar esta acción? (y/n)");

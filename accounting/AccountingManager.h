@@ -51,7 +51,7 @@ public:
 };
 
 /**
- * Constructor de la clase sin parámetros.
+ * Constructor principal de la clase.
  * */
 AccountingManager::AccountingManager() : Module(NAME_ACCOUNTING) {
     try {
@@ -122,10 +122,16 @@ void AccountingManager::addTransaction(Transaction *transaction) {
     }
 }
 
+/**
+ * Imprime el balance total hasta la fecha.
+ * */
 void AccountingManager::printBalance() {
     cout << "El balance de la clínica es de $" << getBalance() << "MXN." << endl;
 }
 
+/**
+ * Imprime el historial de transacciones hasta la fecha.
+ * */
 void AccountingManager::printHistorical() {
     if (transactions.empty()) {
         logWarn("No se encontraron transacciones.");
