@@ -127,18 +127,33 @@ void Application::init() {
             switch (option) {
                 case 1:
                     getPatientManager()->menu();
-                    while(!(cin>>internal)){
+                    while (!(cin >> internal)) {
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         log("Opción inválida, por favor ingresa un número!");
                     }
                     switch (internal) {
-                        
+                        case 1:
+                            getPatientManager()->registerPatient(getPatientManager()->createPatient());
+                            break;
+                        case 2:
+                            getPatientManager()->unregisterPatient();
+                            break;
+                        case 3:
+                            getPatientManager()->searchPatient();
+                            break;
+                        case 4:
+                            getPatientManager()->printRecord();
+                            break;
+                        case 5:
+                            continue;
+                        default:
+                            continue;
                     }
                     break;
                 case 2:
                     getPatientManager()->menu();
-                    while(!(cin>>internal)){
+                    while (!(cin >> internal)) {
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         log("Opción inválida, por favor ingresa un número!");
@@ -149,7 +164,7 @@ void Application::init() {
                     break;
                 case 3:
                     getAccountingManager()->menu();
-                    while(!(cin>>internal)){
+                    while (!(cin >> internal)) {
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         log("Opción inválida, por favor ingresa un número!");

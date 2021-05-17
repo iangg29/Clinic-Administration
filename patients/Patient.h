@@ -50,6 +50,10 @@ public:
     bool patientChronic();
 
     void setChronic(bool chronic);
+
+    void printShort();
+
+    void printComplete();
 };
 
 /**
@@ -144,6 +148,22 @@ bool Patient::patientChronic() {
  * */
 void Patient::setChronic(bool chronic) {
     this->chronic = chronic;
+}
+
+void Patient::printShort() {
+    cout << "(ID:" << getId() << ") Nombre: " << getName() << ":: Edad: " << getAge() << "." << endl;
+}
+
+void Patient::printComplete() {
+    cout << "---- ==== PACIENTE [" << getId() << "] ==== ----" << endl;
+    cout << "Nombre: " << getName() << endl;
+    cout << "Edad: " << getAge() << endl;
+    cout << "Género: "
+         << (getGender() == Gender::MALE ? "Hombre" : getGender() == Gender::FEMALE ? "Mujer" : "Indefinido") << endl;
+    cout << "Nacionalidad: " << getNationality() << endl;
+    cout << "Celular: " << getCelular() << endl;
+    cout << "Email: " << getEmail() << endl;
+    cout << "__________________________________" << endl;
 }
 
 
