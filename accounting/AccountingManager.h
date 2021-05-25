@@ -33,6 +33,8 @@ private:
 public:
     AccountingManager();
 
+    ~AccountingManager();
+
     void start() override;
 
     void end() override;
@@ -58,6 +60,15 @@ AccountingManager::AccountingManager() : Module(NAME_ACCOUNTING) {
         start();
     } catch (exception exception) {
         logWarn("Module couldn't load!");
+    }
+}
+
+/**
+ * Destructor de la clase.
+ * */
+AccountingManager::~AccountingManager() {
+    for (Transaction *transaction : transactions) {
+        delete transaction;
     }
 }
 

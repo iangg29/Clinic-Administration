@@ -35,6 +35,8 @@ private:
 public:
     AppointmentManager();
 
+    ~AppointmentManager();
+
     void start() override;
 
     void end() override;
@@ -67,6 +69,14 @@ AppointmentManager::AppointmentManager() : Module(NAME_APPOINTMENT) {
     }
 }
 
+/**
+ * Destructor de la clase.
+ * */
+AppointmentManager::~AppointmentManager() {
+    for (Appointment *appointment : appointments) {
+        delete appointment;
+    }
+}
 
 /**
  * Método inicial del módulo.

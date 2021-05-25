@@ -36,6 +36,8 @@ private:
 public:
     PatientManager();
 
+    ~PatientManager();
+
     void start() override;
 
     void end() override;
@@ -67,6 +69,15 @@ PatientManager::PatientManager() : Module(NAME_PATIENT) {
         start();
     } catch (exception exception) {
         logWarn("Module couldn't load!");
+    }
+}
+
+/**
+ * Destructor de la clase
+ * */
+PatientManager::~PatientManager() {
+    for (Patient *patient : patients) {
+        delete patient;
     }
 }
 
