@@ -43,7 +43,7 @@ public:
 
     float getBalance();
 
-    float setBalance(float balance);
+    void setBalance(float balance);
 
     void addTransaction(Transaction *transaction);
 
@@ -110,7 +110,7 @@ float AccountingManager::getBalance() {
  * Asigna el balance general.
  * @param balance Nuevo balance
  * */
-float AccountingManager::setBalance(float balance) {
+void AccountingManager::setBalance(float balance) {
     this->balance = balance;
 }
 
