@@ -13,6 +13,7 @@
 #ifndef CLINICADMINISTRATION_TIMEUTIL_H
 #define CLINICADMINISTRATION_TIMEUTIL_H
 
+#include <chrono>
 #include <iostream>
 
 /*
@@ -21,9 +22,8 @@
  * @author Ian
  * */
 
-
 class TimeUtil {
-public:
+   public:
     int getMillis();
 };
 
@@ -33,8 +33,8 @@ public:
  * */
 int TimeUtil::getMillis() {
     return std::chrono::duration_cast<std::chrono::milliseconds>(
-            std::chrono::system_clock::now().time_since_epoch()).count();
+               std::chrono::system_clock::now().time_since_epoch())
+        .count();
 }
 
-
-#endif //CLINICADMINISTRATION_TIMEUTIL_H
+#endif  //CLINICADMINISTRATION_TIMEUTIL_H
